@@ -28,11 +28,11 @@ class Division extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'slug';
     }
 
     public function towinships()

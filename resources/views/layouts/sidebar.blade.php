@@ -61,11 +61,11 @@
                     @endif
                 </a>
             </li>
-            <li class="nav-item{{ request()->url() == route('backend.division.index') ? ' active open ' : '' }}">
-                <a href="{{ route('backend.division.index') }}" class="nav-link nav-toggle">
+            <li class="nav-item{{ request()->url() == route('backend.divisions.index') ? ' active open ' : '' }}">
+                <a href="{{ route('backend.divisions.index') }}" class="nav-link nav-toggle">
                     <i class="icon-puzzle"></i>
                     <span class="title">Division</span>
-                    @if(request()->url() == route('backend.division.index'))
+                    @if(request()->url() == route('backend.divisions.index'))
                         <span class="selected"></span>
                         {{--  <span class="arrow open"></span>  --}}
                     @endif

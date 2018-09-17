@@ -21,6 +21,5 @@ Route::get('dashboard', function() {
     return view('backend.dashboard');
 })->name('dashboard');
 
-Route::get('/division/data', 'DivisionController@division_data')->name('division.data');
-Route::resource('/division', 'DivisionController');
+Route::resource('divisions', 'DivisionController');
 

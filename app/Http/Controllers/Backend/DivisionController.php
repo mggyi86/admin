@@ -21,13 +21,13 @@ class DivisionController extends Controller
 
             return DataTables::of($divisions)->addIndexColumn()
                     ->addColumn('action', function ($division) {
-                        return '<a href="/backend/division/'. $division->name.'"
+                        return '<a href="/backend/divisions/'. $division->slug.'"
                                 class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
 
-                                <a href="/backend/division/'.$division->name.'/edit"
+                                <a href="/backend/divisions/'.$division->slug.'/edit"
                                 class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
 
-                                <button href="/backend/division/'.$division->name.'"
+                                <button data-remote="/backend/divisions/'.$division->slug.'"
                                 class="btn btn-xs btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
                                 // <button data-remote="/backend/division/'.$division->name.'"
                                 // class="btn btn-xs btn-info btn-delete"><i class="glyphicon glyphicon-ok"></i> </button>';
@@ -59,12 +59,15 @@ class DivisionController extends Controller
         $this->validate($request, [
 			'name' => 'required|string|unique:divisions,name'
         ]);
+        // $requestData = $request->only(['name']);
 
-        $requestData = $request->only(['name']);
+        // Division::create($requestData);
+        Division::create([
+            'name' => $request->get('name'),
+            'slug' => str_slug($request->get('name'))
+        ]);
 
-        Division::create($requestData);
-
-        return redirect()->route('backend.division.index')->with('flash_message', 'Division added!');
+        return redirect()->route('backend.divisions.index')->with('flash_message', 'Division added!');
     }
 
     /**
@@ -101,12 +104,18 @@ class DivisionController extends Controller
         $this->validate($request, [
 			'name' => 'required|string|unique:divisions,name,' . $division->id
 		]);
-        $requestData = $request->all();
+        // $requestData = $request->all();
 
-        // $division = Division::findOrFail($id);
-        $division->update($requestData);
+        // $division->update($requestData);
+        $division->name = $request->name;
 
-        return redirect()->route('backend.division.index')->with('flash_message', 'Division updated!');
+        if($division->isDirty()) {
+            $division->name = $request->name;
+            $division->slug = str_slug($request->name);
+            $division->save();
+        }
+
+        return redirect()->route('backend.divisions.index')->with('flash_message', 'Division updated!');
     }
 
     /**
@@ -123,6 +132,6 @@ class DivisionController extends Controller
             return response()->json(['message' => 'success'], 200);
         }
 
-        return redirect()->route('backend.division.index')->with('flash_message', 'Division deleted!');
+        return redirect()->route('backend.divisions.index')->with('flash_message', 'Division deleted!');
     }
 }

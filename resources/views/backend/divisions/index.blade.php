@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <a href="{{ route('backend.division.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
+                                <a href="{{ route('backend.divisions.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -103,7 +103,7 @@ $(document).ready(function() {
     serverSide: true,
     responsive: true,
     autoWidth: true,
-    ajax: '{!! url('/backend/division') !!}',
+    ajax: '{!! url('/backend/divisions') !!}',
     columns: [
         { data: 'DT_Row_Index', name: 'index_column'},
         { data: 'name', name: 'name'},

@@ -39,7 +39,7 @@
                         </div>
                         <div class="portlet-body form">
                             <!-- BEGIN FORM-->
-                            <form action="{{ route('backend.division.store') }}" class="form-horizontal" method="POST">
+                            <form action="{{ route('backend.divisions.store') }}" class="form-horizontal" method="POST">
                                 @csrf
                                 <div class="form-body">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error ' : ''}}">
@@ -58,7 +58,7 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
                                             <button type="submit" class="btn green">Submit</button>
-                                            <a type="button" class="btn default" href="{{ route('backend.division.index') }}">Cancel</a>
+                                            <a type="button" class="btn default" href="{{ route('backend.divisions.index') }}">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
