@@ -27,11 +27,10 @@ class DivisionController extends Controller
                                 <a href="/backend/division/'.$division->name.'/edit"
                                 class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
 
-                                <a href="/backend/division/'.$division->name.'"
-                                class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> </a>
-
-                                <a href="/backend/division/'.$division->name.'"
-                                class="btn btn-xs btn-info"><i class="glyphicon glyphicon-ok"></i> </a>';
+                                <button href="/backend/division/'.$division->name.'"
+                                class="btn btn-xs btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
+                                // <button data-remote="/backend/division/'.$division->name.'"
+                                // class="btn btn-xs btn-info btn-delete"><i class="glyphicon glyphicon-ok"></i> </button>';
                     })
                     ->make(true);
         }
@@ -118,8 +117,12 @@ class DivisionController extends Controller
      */
     public function destroy(Division $division)
     {
-        $division->destroy();
+        $division->delete();
 
-        return redirect('admin/divisions')->with('flash_message', 'Division deleted!');
+        if (request()->ajax()) {
+            return response()->json(['message' => 'success'], 200);
+        }
+
+        return redirect()->route('backend.division.index')->with('flash_message', 'Division deleted!');
     }
 }

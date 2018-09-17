@@ -117,10 +117,30 @@ $(document).ready(function() {
     "order": [[ 1, 'asc' ]]
     });
     table.on( 'order.dt search.dt', function () {
-    table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        cell.innerHTML = i+1;
-    } );
-} ).draw();
+        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        });
+    }).draw();
+
+    $('#users-table').on('click', '.btn-delete[data-remote]', function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var url = $(this).data('remote');
+        // confirm then
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            dataType: 'json',
+            data: {method: '_DELETE', submit: true}
+        }).always(function (data) {
+            $('#users-table').DataTable().draw(false);
+        });
+    });
 });
 </script>
 @endpush
