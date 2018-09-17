@@ -13908,17 +13908,12 @@ Vue.component('example-component', __webpack_require__(39));
 var app = new Vue({
   el: '#app',
   methods: {
-    delete: function _delete() {
-      console.log('test');
+    flashMessageDelay: function flashMessageDelay() {
+      $('div.alert').delay(3000).fadeOut(350);
     }
   },
   mounted: function mounted() {
-    $('#test').click(function () {
-      alert('success');
-    });
-    $('#delete').click(function () {
-      alert('success');
-    });
+    this.flashMessageDelay();
   }
 });
 

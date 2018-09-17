@@ -24,13 +24,13 @@ class DivisionController extends Controller
             return DataTables::of($divisions)->addIndexColumn()
                     ->addColumn('action', function ($division) {
                         return '<a href="/backend/divisions/'. $division->slug.'"
-                                class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
+                                class="btn btn-sm btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
 
                                 <a href="/backend/divisions/'.$division->slug.'/edit"
-                                class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
+                                class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
 
                                 <button data-remote="/backend/divisions/'.$division->slug.'"
-                                class="btn btn-xs btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
+                                class="btn btn-sm btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
                                 // <button data-remote="/backend/division/'.$division->name.'"
                                 // class="btn btn-xs btn-info btn-delete"><i class="glyphicon glyphicon-ok"></i> </button>';
                     })
@@ -60,7 +60,9 @@ class DivisionController extends Controller
     {
         $request->storeDivision();
 
-        return redirect()->route('backend.divisions.index')->with('flash_message', 'Division added!');
+        flash('Division added!')->success()->important();
+
+        return redirect()->route('backend.divisions.index');
     }
 
     /**
@@ -96,7 +98,9 @@ class DivisionController extends Controller
     {
         $request->updateDivision($division);
 
-        return redirect()->route('backend.divisions.index')->with('flash_message', 'Division updated!');
+        flash('Division updated!')->success()->important();
+
+        return redirect()->route('backend.divisions.index');
     }
 
     /**
@@ -108,11 +112,12 @@ class DivisionController extends Controller
     public function destroy(Division $division)
     {
         $division->delete();
+        flash('Division deleted!')->error()->important();
 
         if (request()->ajax()) {
             return response()->json(['message' => 'success'], 200);
         }
 
-        return redirect()->route('backend.divisions.index')->with('flash_message', 'Division deleted!');
+        return redirect()->route('backend.divisions.index');
     }
 }

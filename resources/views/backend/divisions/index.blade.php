@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create Division')
+@section('title', 'Divisions')
 @push('css')
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
@@ -11,18 +11,18 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="index.html">Home</a>
+            <a href="{{ route('backend.dashboard') }}">Home</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Tables</span>
+            <span>Divisions</span>
         </li>
     </ul>
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> Basic Bootstrap Tables
-    <small>basic bootstrap tables with various options and styles</small>
+<h1 class="page-title"> Division Table
+    {{--  <small>basic bootstrap tables with various options and styles</small>  --}}
 </h1>
 <!-- END PAGE TITLE-->
 <!-- END PAGE HEADER-->
@@ -39,6 +39,7 @@
             <div class="portlet-body">
                 <div class="table-toolbar">
                     <div class="row">
+                        @include('flash::message')
                         <div class="col-md-6">
                             <div class="btn-group">
                                 <a href="{{ route('backend.divisions.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
@@ -131,14 +132,13 @@ $(document).ready(function() {
         });
 
         var url = $(this).data('remote');
-        // confirm then
+
         $.ajax({
             url: url,
-            type: 'DELETE',
-            dataType: 'json',
-            data: {method: '_DELETE', submit: true}
+            type: 'DELETE'
         }).always(function (data) {
             $('#users-table').DataTable().draw(false);
+            location.reload();
         });
     });
 });

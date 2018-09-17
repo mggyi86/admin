@@ -20,16 +20,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app',
     methods: {
-        delete: function() {
-          console.log('test')
+        flashMessageDelay: function() {
+          $('div.alert').delay(3000).fadeOut(350);
         }
     },
     mounted() {
-      $('#test').click(function() {
-        alert('success');
-      });
-      $('#delete').click(function() {
-        alert('success');
-      });
+      this.flashMessageDelay();
     },
 });
