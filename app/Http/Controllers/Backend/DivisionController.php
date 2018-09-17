@@ -6,6 +6,8 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateDivisionRequest;
+use App\Http\Requests\UpdateDivisionRequest;
 
 class DivisionController extends Controller
 {
@@ -54,18 +56,9 @@ class DivisionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDivisionRequest $request)
     {
-        $this->validate($request, [
-			'name' => 'required|string|unique:divisions,name'
-        ]);
-        // $requestData = $request->only(['name']);
-
-        // Division::create($requestData);
-        Division::create([
-            'name' => $request->get('name'),
-            'slug' => str_slug($request->get('name'))
-        ]);
+        $request->storeDivision();
 
         return redirect()->route('backend.divisions.index')->with('flash_message', 'Division added!');
     }
@@ -99,21 +92,9 @@ class DivisionController extends Controller
      * @param  \App\Division  $division
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Division $division)
+    public function update(UpdateDivisionRequest $request, Division $division)
     {
-        $this->validate($request, [
-			'name' => 'required|string|unique:divisions,name,' . $division->id
-		]);
-        // $requestData = $request->all();
-
-        // $division->update($requestData);
-        $division->name = $request->name;
-
-        if($division->isDirty()) {
-            $division->name = $request->name;
-            $division->slug = str_slug($request->name);
-            $division->save();
-        }
+        $request->updateDivision($division);
 
         return redirect()->route('backend.divisions.index')->with('flash_message', 'Division updated!');
     }
