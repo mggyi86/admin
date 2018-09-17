@@ -5,6 +5,7 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 <!-- END PAGE LEVEL PLUGINS -->
 @endpush
 @section('content')
@@ -92,6 +93,8 @@
 <script src="{{ asset('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js') }}" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{ asset('assets/pages/scripts/table-datatables-managed.min.js') }}" type="text/javascript"></script>
@@ -125,20 +128,38 @@ $(document).ready(function() {
 
     $('#users-table').on('click', '.btn-delete[data-remote]', function (e) {
         e.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         var url = $(this).data('remote');
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this division!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, Cancel!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-        $.ajax({
-            url: url,
-            type: 'DELETE'
-        }).always(function (data) {
-            $('#users-table').DataTable().draw(false);
-            location.reload();
+                $.ajax({
+                    url: url,
+                    type: 'DELETE'
+                }).always(function (data) {
+                    $('#users-table').DataTable().draw(false);
+                    //swal("Deleted!", "Division has been deleted.", "success");
+                    //location.reload();
+                });
+                swal("Deleted!", "Division has been deleted.", "success");
+            } else {
+              swal("Cancelled", "Division is safe :)", "error");
+            }
         });
     });
 });
