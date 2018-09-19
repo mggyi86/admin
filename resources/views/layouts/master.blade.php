@@ -26,7 +26,7 @@
         <link href="{{ asset('assets/layouts/layout/css/themes/darkblue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
         <link href="{{ asset('assets/layouts/layout/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         <!-- End Styles -->
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="favicon.ico" />
@@ -64,6 +64,9 @@
             @include('layouts.footer')
             <!-- END FOOTER -->
         </div>
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}"></script>
+        <!-- End Scripts -->
         <!-- BEGIN CORE PLUGINS -->
         <script src="{{ asset('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -81,9 +84,6 @@
         <script src="{{ asset('assets/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/layouts/global/scripts/quick-nav.min.js') }}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
-        <!-- End Scripts -->
         @stack('scripts')
     </body>
 
