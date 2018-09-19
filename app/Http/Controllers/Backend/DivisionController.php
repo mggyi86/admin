@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Division;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateDivisionRequest;
 use App\Http\Requests\UpdateDivisionRequest;
+use App\Http\Responses\DivisionIndexResponse;
 
 class DivisionController extends Controller
 {
@@ -18,26 +18,9 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()) {
-            $divisions = Division::all();
+        $divisions = Division::all();
 
-            return DataTables::of($divisions)->addIndexColumn()
-                    ->addColumn('action', function ($division) {
-                        return '<a href="/backend/divisions/'. $division->slug.'"
-                                class="btn btn-sm btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
-
-                                <a href="/backend/divisions/'.$division->slug.'/edit"
-                                class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
-
-                                <button data-remote="/backend/divisions/'.$division->slug.'"
-                                class="btn btn-sm btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
-                                // <button data-remote="/backend/division/'.$division->name.'"
-                                // class="btn btn-xs btn-info btn-delete"><i class="glyphicon glyphicon-ok"></i> </button>';
-                    })
-                    ->make(true);
-        }
-
-        return view('backend.divisions.index');
+        return new DivisionIndexResponse($divisions);
     }
 
     /**
