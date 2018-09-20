@@ -43,7 +43,7 @@
                         @include('flash::message')
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <a href="{{ route('backend.divisions.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
+                                <a href="{{ route('backend.townships.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="divisions-table" style="width: 100%;">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="townships-table" style="width: 100%;">
                     <thead>
                         <tr>
                             <th></th>
@@ -102,12 +102,12 @@
 
 <script>
 $(document).ready(function() {
-    var table = $('#divisions-table').DataTable({
+    var table = $('#townships-table').DataTable({
     processing: true,
     serverSide: true,
     responsive: true,
     autoWidth: true,
-    ajax: '{!! url('/backend/divisions') !!}',
+    ajax: '{!! url('/backend/townships') !!}',
     columns: [
         { data: 'DT_Row_Index', name: 'index_column'},
         { data: 'name', name: 'name'},
@@ -126,7 +126,7 @@ $(document).ready(function() {
         });
     }).draw();
 
-    $('#divisions-table').on('click', '.btn-delete[data-remote]', function (e) {
+    $('#townships-table').on('click', '.btn-delete[data-remote]', function (e) {
         e.preventDefault();
         var url = $(this).data('remote');
         swal({
@@ -152,7 +152,7 @@ $(document).ready(function() {
                     url: url,
                     type: 'DELETE'
                 }).always(function (data) {
-                    $('#divisions-table').DataTable().draw(false);
+                    $('#townships-table').DataTable().draw(false);
                     //swal("Deleted!", "Division has been deleted.", "success");
                     //location.reload();
                 });

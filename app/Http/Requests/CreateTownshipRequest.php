@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Division;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDivisionRequest extends FormRequest
+class CreateTownshipRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +25,18 @@ class UpdateDivisionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:divisions,name,' . $this->route('division')->id
+            'division' => 'required|integer|exists:divisions,id',
+            'name' => 'required|string|unique:townships,name'
         ];
     }
 
-    public function updateDivision($division)
+    public function storeTownship()
     {
-        $division->name = $this->name;
+        $division = Division::findOrFail($this->division);
 
-        if($division->isDirty()) {
-            $division->slug = str_slug($this->name);
-            $division->save();
-        }
+        $division->townships()->create([
+            'name' => $this->name,
+            'slug' => str_slug($this->name)
+        ]);
     }
 }

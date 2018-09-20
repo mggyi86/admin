@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Township;
+use App\Models\Division;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Division extends Model
+class Township extends Model
 {
     use SoftDeletes;
 
@@ -15,7 +15,7 @@ class Division extends Model
      *
      * @var string
      */
-    protected $table = 'divisions';
+    protected $table = 'townships';
 
     /**
     * The database primary key value.
@@ -29,15 +29,15 @@ class Division extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'division_id'];
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    public function townships()
+    public function division()
     {
-        return $this->hasMany(Township::class);
+        return $this->belongsTo(Division::class);
     }
 }
