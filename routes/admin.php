@@ -24,3 +24,5 @@ Route::get('dashboard', function() {
 Route::resource('divisions', 'DivisionController');
 
 Route::resource('townships', 'TownshipController');
+
+Route::resource('categories', 'CategoryController');

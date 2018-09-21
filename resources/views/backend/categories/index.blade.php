@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Townships')
+@section('title', 'Categories')
 @push('css')
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
@@ -16,13 +16,13 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Townships</span>
+            <span>Categories</span>
         </li>
     </ul>
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> Township Table
+<h1 class="page-title"> Category Table
     {{--  <small>basic bootstrap tables with various options and styles</small>  --}}
 </h1>
 <!-- END PAGE TITLE-->
@@ -34,7 +34,7 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase"> Township Lists</span>
+                    <span class="caption-subject bold uppercase"> Category Lists</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -43,7 +43,7 @@
                         @include('flash::message')
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <a href="{{ route('backend.townships.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
+                                <a href="{{ route('backend.categories.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -71,12 +71,11 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="townships-table" style="width: 100%;">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="categories-table" style="width: 100%;">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Division</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -103,16 +102,15 @@
 
 <script>
 $(document).ready(function() {
-    var table = $('#townships-table').DataTable({
+    var table = $('#categories-table').DataTable({
     processing: true,
     serverSide: true,
     responsive: true,
     autoWidth: true,
-    ajax: '{!! url('/backend/townships') !!}',
+    ajax: '{!! url('/backend/categories') !!}',
     columns: [
         { data: 'DT_Row_Index', name: 'index_column'},
         { data: 'name', name: 'name'},
-        { data: 'division_id', name: 'division_id'},
         { data: 'action', name: 'action', orderable: false, searchable: false }
     ],
     "columnDefs": [{
@@ -128,7 +126,7 @@ $(document).ready(function() {
         });
     }).draw();
 
-    $('#townships-table').on('click', '.btn-delete[data-remote]', function (e) {
+    $('#categories-table').on('click', '.btn-delete[data-remote]', function (e) {
         e.preventDefault();
         var url = $(this).data('remote');
         swal({
@@ -154,13 +152,13 @@ $(document).ready(function() {
                     url: url,
                     type: 'DELETE'
                 }).always(function (data) {
-                    $('#townships-table').DataTable().draw(false);
-                    //swal("Deleted!", "Township has been deleted.", "success");
+                    $('#categories-table').DataTable().draw(false);
+                    //swal("Deleted!", "Category has been deleted.", "success");
                     //location.reload();
                 });
-                swal("Deleted!", "Township has been deleted.", "success");
+                swal("Deleted!", "Category has been deleted.", "success");
             } else {
-              swal("Cancelled", "Township is safe :)", "error");
+              swal("Cancelled", "Category is safe :)", "error");
             }
         });
     });

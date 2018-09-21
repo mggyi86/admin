@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Division;
+use App\Models\Category;
 use Faker\Generator as Faker;
 
-$factory->define(Division::class, function (Faker $faker) {
+$factory->define(Category::class, function (Faker $faker) {
     $name = $faker->name;
 
     return [

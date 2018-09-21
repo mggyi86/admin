@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Division;
 
 use App\Models\Division;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTownshipRequest extends FormRequest
+class CreateDivisionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +25,13 @@ class CreateTownshipRequest extends FormRequest
     public function rules()
     {
         return [
-            'division' => 'required|integer|exists:divisions,id',
-            'name' => 'required|string|unique:townships,name'
+            'name' => 'required|string|unique:divisions,name'
         ];
     }
 
-    public function storeTownship()
+    public function storeDivision()
     {
-        $division = Division::findOrFail($this->division);
-
-        $division->townships()->create([
+        Division::create([
             'name' => $this->name,
             'slug' => str_slug($this->name)
         ]);

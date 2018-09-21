@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create Division')
+@section('title', 'Township')
 
 @section('content')
 <div class="page-bar">

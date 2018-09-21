@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
-use App\Models\Division;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateDivisionRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +24,17 @@ class CreateDivisionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:divisions,name'
+            'name' => 'required|string|unique:categories,name,' . $this->route('category')->id
         ];
     }
 
-    public function storeDivision()
+    public function updateCategory($category)
     {
-        Division::create([
-            'name' => $this->name,
-            'slug' => str_slug($this->name)
-        ]);
+        $category->name = $this->name;
+
+        if($category->isDirty()) {
+            $category->slug = str_slug($this->name);
+            $category->save();
+        }
     }
 }

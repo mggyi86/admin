@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Division')
+@section('title', 'Category')
 
 @section('content')
 <div class="page-bar">
@@ -31,7 +31,7 @@
                 <div class="tools">
                     <a href="javascript:;" class="collapse"> </a>
                     {{--  <a href="#portlet-config" data-toggle="modal" class="config"> </a>  --}}
-                    <a href="{{ route('backend.divisions.show', $division->slug) }}" class="reload"> </a>
+                    <a href="{{ route('backend.categories.show', $category->slug) }}" class="reload"> </a>
                     <a href="javascript:;" class="remove"> </a>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             <tr>
                                 <td> 1 </td>
                                 <td> Name </td>
-                                <td> {{ $division->name }} </td>
+                                <td> {{ $category->name }} </td>
                                 <td>
                                     <span class="label label-sm label-success"> Approved </span>
                                 </td>

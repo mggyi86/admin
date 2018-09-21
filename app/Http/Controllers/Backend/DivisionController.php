@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Division;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateDivisionRequest;
-use App\Http\Requests\UpdateDivisionRequest;
 use App\Http\Responses\DivisionIndexResponse;
+use App\Http\Requests\Division\CreateDivisionRequest;
+use App\Http\Requests\Division\UpdateDivisionRequest;
 
 class DivisionController extends Controller
 {

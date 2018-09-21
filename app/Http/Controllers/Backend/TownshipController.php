@@ -6,9 +6,9 @@ use App\Models\Division;
 use App\Models\Township;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateTownshipRequest;
-use App\Http\Requests\UpdateTownshipRequest;
 use App\Http\Responses\TownshipIndexResponse;
+use App\Http\Requests\Township\CreateTownshipRequest;
+use App\Http\Requests\Township\UpdateTownshipRequest;
 
 class TownshipController extends Controller
 {
