@@ -26,3 +26,5 @@ Route::resource('divisions', 'DivisionController');
 Route::resource('townships', 'TownshipController');
 
 Route::resource('categories', 'CategoryController');
+
+Route::resource('merchants', 'MerchantController');

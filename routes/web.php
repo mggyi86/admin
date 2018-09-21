@@ -11,14 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.dashboard');
-// });
-
-// Route::get('dashboard', function() {
-// 	return view('admin.dashboard');
-// });
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
@@ -30,12 +22,4 @@ Route::get('/', function() {
 Route::get('/form', function() {
     return view('form');
 });
-
-
-// Route::get('/division', function() {
-//     return view('division');
-// });
-// Route::group(['middleware' => ['role:admin']], function () {
-
-// });
 
