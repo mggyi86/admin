@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Divisions')
+@section('title', 'Townships')
 @push('css')
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
@@ -16,13 +16,13 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Divisions</span>
+            <span>Townships</span>
         </li>
     </ul>
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> Division Table
+<h1 class="page-title"> Township Table
     {{--  <small>basic bootstrap tables with various options and styles</small>  --}}
 </h1>
 <!-- END PAGE TITLE-->
@@ -34,7 +34,7 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase"> Division Lists</span>
+                    <span class="caption-subject bold uppercase"> Township Lists</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -76,6 +76,7 @@
                         <tr>
                             <th></th>
                             <th>Name</th>
+                            <th>Division</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -111,6 +112,7 @@ $(document).ready(function() {
     columns: [
         { data: 'DT_Row_Index', name: 'index_column'},
         { data: 'name', name: 'name'},
+        { data: 'division_id', name: 'division_id'},
         { data: 'action', name: 'action', orderable: false, searchable: false }
     ],
     "columnDefs": [{

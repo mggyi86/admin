@@ -20,6 +20,9 @@ class TownshipIndexResponse implements Responsable
         if (request()->ajax()) {
 
             return DataTables::of($this->townships)->addIndexColumn()
+                    ->editColumn('division_id', function($township) {
+                        return $township->division->name;
+                    })
                     ->addColumn('action', function ($township) {
                         return '<a href="/backend/townships/'. $township->slug.'"
                                 class="btn btn-sm btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>

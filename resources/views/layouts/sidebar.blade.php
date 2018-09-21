@@ -81,6 +81,16 @@
                     </li>
                 </ul>  --}}
             </li>
+            <li class="nav-item{{ request()->url() == route('backend.townships.index') ? ' active open ' : '' }}">
+                <a href="{{ route('backend.townships.index') }}" class="nav-link nav-toggle">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">Township</span>
+                    @if(request()->url() == route('backend.townships.index'))
+                        <span class="selected"></span>
+                        {{--  <span class="arrow open"></span>  --}}
+                    @endif
+                </a>
+            </li>
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>

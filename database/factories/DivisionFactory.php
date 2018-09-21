@@ -4,10 +4,10 @@ use App\Models\Division;
 use Faker\Generator as Faker;
 
 $factory->define(Division::class, function (Faker $faker) {
-    $name = $faker->name;
+    $city = $faker->city;
 
     return [
-        'name' =>  $name,
-        'slug' => str_slug($name)
+        'name' =>  $city,
+        'slug' => str_slug($city)
     ];
 });
