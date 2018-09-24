@@ -39,7 +39,7 @@
                         </div>
                         <div class="portlet-body form">
                             <!-- BEGIN FORM-->
-                            <form action="{{ route('backend.merchants.update', $user->slug) }}" class="form-horizontal" method="POST">
+                            <form action="{{ route('backend.merchants.update', $merchant->slug) }}" class="form-horizontal" method="POST">
                                 {{ method_field('PUT') }}
                                 @csrf
                                 <div class="form-body">
@@ -47,7 +47,7 @@
                                             <label for="name" class="col-md-3 control-label">Name</label>
                                             <div class="col-md-4">
                                                 <input type="text" class="form-control" placeholder="Name"
-                                                name="name" value="{{ old('name') ? old('name') : $user->name }}" required>
+                                                name="name" value="{{ old('name') ? old('name') : $merchant->name }}" required>
                                                 @if ($errors->has('name'))
                                                     <span class="help-block"> {{ $errors->first('name') }} </span>
                                                 @endif
@@ -58,7 +58,7 @@
                                             <label for="email" class="col-md-3 control-label">Email Address</label>
                                             <div class="col-md-4">
                                                 <input type="email" class="form-control" placeholder="Email Address"
-                                                name="email" value="{{ old('email') ? old('email') : $user->email }}" required>
+                                                name="email" value="{{ old('email') ? old('email') : $merchant->email }}" required>
                                                 @if ($errors->has('email'))
                                                 <span class="help-block"> {{ $errors->first('email') }} </span>
                                                 @endif
@@ -69,7 +69,7 @@
                                             <label for="phone" class="col-md-3 control-label">Phone Number</label>
                                             <div class="col-md-4">
                                                 <input type="text" class="form-control" placeholder="Phone Number"
-                                                name="phone" value="{{ old('phone') ? old('phone') : $user->phone }}" required>
+                                                name="phone" value="{{ old('phone') ? old('phone') : $merchant->phone }}">
                                                 @if ($errors->has('phone'))
                                                     <span class="help-block"> {{ $errors->first('phone') }} </span>
                                                 @endif
@@ -80,18 +80,18 @@
                                             <label for="address" class="col-md-3 control-label">Address</label>
                                             <div class="col-md-4">
                                                 <input type="text" class="form-control" placeholder="Address"
-                                                name="address" value="{{ old('address') ? old('address') : $user->address }}" required>
+                                                name="address" value="{{ old('address') ? old('address') : $merchant->address }}">
                                                 @if ($errors->has('address'))
                                                     <span class="help-block"> {{ $errors->first('address') }} </span>
                                                 @endif
                                             </div>
                                         </div>
 
-                                        <div class="form-group{{ $errors->has('password') ? ' has-error ' : ''}}">
+                                        {{--  <div class="form-group{{ $errors->has('password') ? ' has-error ' : ''}}">
                                             <label for="password" class="col-md-3 control-label">Password</label>
                                             <div class="col-md-4">
                                                 <input type="password" class="form-control" placeholder="Password"
-                                                name="password" value="{{ old('password') }}" required>
+                                                name="password" value="{{ old('password') }}">
                                                 @if ($errors->has('password'))
                                                 <span class="help-block"> {{ $errors->first('password') }} </span>
                                                 @endif
@@ -104,12 +104,12 @@
                                             </label>
                                             <div class="col-md-4">
                                                 <input type="password" class="form-control" placeholder="Confirm Password"
-                                                name="password_confirmation" value="{{ old('password_confirmation') }}" required>
+                                                name="password_confirmation" value="{{ old('password_confirmation') }}">
                                                 @if ($errors->has('password_confirmation'))
                                                 <span class="help-block"> {{ $errors->first('password_confirmation') }} </span>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div>  --}}
                                 </div>
 
                                 <div class="form-actions">

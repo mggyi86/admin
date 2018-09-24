@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
         $admin = factory(User::class)->create([
                     'name' => 'Super Admin',
                     'email' => 'admin@admin.com',
+                    'email_verified_at' => Carbon::now(),
                     'password' => Hash::make('adminadmin'),
                     'slug' => str_slug('Super Admin')
                  ]);
@@ -37,14 +39,17 @@ class UsersTableSeeder extends Seeder
         $merchant = factory(User::class)->create([
                         'name' => 'Merchant User',
                         'email' => 'merchant@merchant.com',
+                        'email_verified_at' => Carbon::now(),
                         'password' => Hash::make('merchantmerchant'),
                         'slug' => str_slug('Merchant User')
                     ]);
         $merchant->assignRole($merchant_role );
 
         for($i=0; $i<30; $i++) {
-            $merchant = factory(User::class)->create();
-            $merchant->assignRole($merchant_role );
+            $merchant = factory(User::class)->create([
+                'email_verified_at' => Carbon::now()
+            ]);
+            $merchant->assignRole($merchant_role);
         }
 
 

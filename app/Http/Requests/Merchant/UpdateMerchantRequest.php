@@ -27,9 +27,9 @@ class UpdateMerchantRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('merchant')->id ,
-            'password' => 'required|string|min:6|confirmed',
+            // 'password' => 'required|string|min:6|confirmed',
             'phone' => 'required|phone:MM',
-            'address' => 'string'
+            'address' => 'nullable|string'
         ];
     }
 
@@ -37,7 +37,7 @@ class UpdateMerchantRequest extends FormRequest
     {
         $merchant->name     = $this->name;
         $merchant->email    = $this->email;
-        $merchant->password = Hash::make($this->password);
+        // $merchant->password = Hash::make($this->password);
         $merchant->phone    = $this->phone;
         $merchant->address  = $this->address;
 

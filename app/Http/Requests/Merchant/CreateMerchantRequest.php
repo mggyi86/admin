@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Merchant;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
@@ -30,19 +31,21 @@ class CreateMerchantRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'phone' => 'required|phone:MM',
-            'address' => 'string'
+            'address' => 'nullable|string'
         ];
     }
 
     public function storeMerchant()
     {
-        User::create([
-            'name'      => $this->name,
-            'slug'      => str_slug($this->name),
-            'email'     => $this->email,
-            'password'  => Hash::make($this->password),
-            'phone'     => $this->phone,
-            'address'   => $this->address
-        ]);
+        $merchant = User::create([
+                    'name'              => $this->name,
+                    'slug'              => str_slug($this->name),
+                    'email'             => $this->email,
+                    'email_verified_at' => Carbon::now(),
+                    'password'          => Hash::make($this->password),
+                    'phone'             => $this->phone,
+                    'address'           => $this->address
+                ]);
+        $merchant->assignRole('merchant');
     }
 }

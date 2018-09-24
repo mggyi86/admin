@@ -31,7 +31,7 @@
                 <div class="tools">
                     <a href="javascript:;" class="collapse"> </a>
                     {{--  <a href="#portlet-config" data-toggle="modal" class="config"> </a>  --}}
-                    <a href="{{ route('backend.merchants.show', $user->slug) }}" class="reload"> </a>
+                    <a href="{{ route('backend.merchants.show', $merchant->slug) }}" class="reload"> </a>
                     <a href="javascript:;" class="remove"> </a>
                 </div>
             </div>
@@ -43,41 +43,28 @@
                                 <th> # </th>
                                 <th> Title </th>
                                 <th> Description </th>
-                                <th> Status </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td> 1 </td>
                                 <td> Name </td>
-                                <td> {{ $user->name }} </td>
-                                <td>
-                                    <span class="label label-sm label-success"> Approved </span>
-                                </td>
+                                <td> {{ $merchant->name }} </td>
                             </tr>
                             <tr>
                                 <td> 2 </td>
                                 <td> Email </td>
-                                <td> {{ $user->email }} </td>
-                                <td>
-                                    <span class="label label-sm label-success"> Approved </span>
-                                </td>
+                                <td> {{ $merchant->email }} </td>
                             </tr>
                             <tr>
                                 <td> 3 </td>
                                 <td> Phone Number </td>
-                                <td> {{ $user->phone }} </td>
-                                <td>
-                                    <span class="label label-sm label-success"> Approved </span>
-                                </td>
+                                <td> {{ $merchant->phone }} </td>
                             </tr>
                             <tr>
                                 <td> 4 </td>
                                 <td> Address </td>
-                                <td> {{ $user->address }} </td>
-                                <td>
-                                    <span class="label label-sm label-success"> Approved </span>
-                                </td>
+                                <td> {{ $merchant->address }} </td>
                             </tr>
                         </tbody>
                     </table>
