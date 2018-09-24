@@ -39,7 +39,7 @@
                         </div>
                         <div class="portlet-body form">
                             <!-- BEGIN FORM-->
-                            <form action="{{ route('backend.merchants.update', $merchant->slug) }}" class="form-horizontal" method="POST">
+                            <form action="{{ route('backend.merchants.update', $merchant->uuid) }}" class="form-horizontal" method="POST">
                                 {{ method_field('PUT') }}
                                 @csrf
                                 <div class="form-body">

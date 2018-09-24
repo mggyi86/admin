@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email', 'email_verified_at', 'password', 'phone', 'address'
+        'name', 'uuid', 'email', 'email_verified_at', 'password', 'phone', 'address'
     ];
 
     /**
@@ -32,6 +32,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'uuid';
     }
 }

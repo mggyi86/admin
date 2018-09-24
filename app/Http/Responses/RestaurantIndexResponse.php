@@ -6,33 +6,33 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Responsable;
 
-class MerchantIndexResponse implements Responsable
+class RestaurantIndexResponse implements Responsable
 {
-    protected $merchants;
+    protected $restaurants;
 
-    public function __construct(Collection $merchants)
+    public function __construct(Collection $restaurants)
     {
-        $this->merchants = $merchants;
+        $this->restaurants = $restaurants;
     }
 
     public function toResponse($request)
     {
         if (request()->ajax()) {
 
-            return DataTables::of($this->merchants)->addIndexColumn()
-                    ->addColumn('action', function ($merchant) {
-                        return '<a href="/backend/merchants/'. $merchant->uuid.'"
+            return DataTables::of($this->restaurants)->addIndexColumn()
+                    ->addColumn('action', function ($restaurant) {
+                        return '<a href="/backend/restaurants/'. $restaurant->slug.'"
                                 class="btn btn-sm btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
 
-                                <a href="/backend/merchants/'.$merchant->uuid.'/edit"
+                                <a href="/backend/restaurants/'.$restaurant->slug.'/edit"
                                 class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
 
-                                <button data-remote="/backend/merchants/'.$merchant->uuid.'"
+                                <button data-remote="/backend/restaurants/'.$restaurant->slug.'"
                                 class="btn btn-sm btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
                     })
                     ->make(true);
         }
 
-        return view('backend.merchants.index');
+        return view('backend.divisions.index');
     }
 }

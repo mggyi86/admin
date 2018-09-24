@@ -31,7 +31,7 @@
                 <div class="tools">
                     <a href="javascript:;" class="collapse"> </a>
                     {{--  <a href="#portlet-config" data-toggle="modal" class="config"> </a>  --}}
-                    <a href="{{ route('backend.merchants.show', $merchant->slug) }}" class="reload"> </a>
+                    <a href="{{ route('backend.merchants.show', $merchant->uuid) }}" class="reload"> </a>
                     <a href="javascript:;" class="remove"> </a>
                 </div>
             </div>

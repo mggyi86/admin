@@ -42,7 +42,6 @@ class UpdateMerchantRequest extends FormRequest
         $merchant->address  = $this->address;
 
         if($merchant->isDirty()) {
-            $merchant->slug = str_slug($this->name);
             $merchant->save();
         }
     }

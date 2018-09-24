@@ -4,6 +4,7 @@ namespace App\Http\Requests\Merchant;
 
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -39,7 +40,7 @@ class CreateMerchantRequest extends FormRequest
     {
         $merchant = User::create([
                     'name'              => $this->name,
-                    'slug'              => str_slug($this->name),
+                    'uuid'              => Str::orderedUuid(),
                     'email'             => $this->email,
                     'email_verified_at' => Carbon::now(),
                     'password'          => Hash::make($this->password),

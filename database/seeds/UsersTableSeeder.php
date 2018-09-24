@@ -30,8 +30,7 @@ class UsersTableSeeder extends Seeder
                     'name' => 'Super Admin',
                     'email' => 'admin@admin.com',
                     'email_verified_at' => Carbon::now(),
-                    'password' => Hash::make('adminadmin'),
-                    'slug' => str_slug('Super Admin')
+                    'password' => Hash::make('adminadmin')
                  ]);
         $admin->assignRole($admin_role );
 
@@ -40,8 +39,7 @@ class UsersTableSeeder extends Seeder
                         'name' => 'Merchant User',
                         'email' => 'merchant@merchant.com',
                         'email_verified_at' => Carbon::now(),
-                        'password' => Hash::make('merchantmerchant'),
-                        'slug' => str_slug('Merchant User')
+                        'password' => Hash::make('merchantmerchant')
                     ]);
         $merchant->assignRole($merchant_role );
 
