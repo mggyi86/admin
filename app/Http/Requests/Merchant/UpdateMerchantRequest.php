@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Merchant;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMerchantRequest extends FormRequest
@@ -26,8 +27,23 @@ class UpdateMerchantRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('merchant')->id ,
-            'phone_number' => 'phone:MM',
+            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|phone:MM',
             'address' => 'string'
         ];
+    }
+
+    public function updateMerchant($merchant)
+    {
+        $merchant->name     = $this->name;
+        $merchant->email    = $this->email;
+        $merchant->password = Hash::make($this->password);
+        $merchant->phone    = $this->phone;
+        $merchant->address  = $this->address;
+
+        if($merchant->isDirty()) {
+            $merchant->slug = str_slug($this->name);
+            $merchant->save();
+        }
     }
 }

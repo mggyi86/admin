@@ -45,9 +45,8 @@
                                     <div class="form-group{{ $errors->has('name') ? ' has-error ' : ''}}">
                                         <label class="col-md-3 control-label">Name</label>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control"
-                                            placeholder="Enter Division Name" name="name" value="{{ old('name') }}"
-                                            required>
+                                            <input type="text" class="form-control" placeholder="Division Name"
+                                            name="name" value="{{ old('name') }}" required>
                                             @if ($errors->has('name'))
                                                 <span class="help-block"> {{ $errors->first('name') }} </span>
                                             @endif

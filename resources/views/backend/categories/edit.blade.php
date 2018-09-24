@@ -44,11 +44,10 @@
                                 @csrf
                                 <div class="form-body">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error ' : ''}}">
-                                        <label class="col-md-3 control-label">Name</label>
+                                        <label for="name" class="col-md-3 control-label">Name</label>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control"
-                                            placeholder="Enter Category Name" name="name" value="{{ old('name') ? old('name') : $category->name }}"
-                                            required>
+                                            <input type="text" class="form-control" placeholder="Category Name"
+                                            name="name" value="{{ old('name') ? old('name') : $category->name }}" required>
                                             @if ($errors->has('name'))
                                                 <span class="help-block"> {{ $errors->first('name') }} </span>
                                             @endif

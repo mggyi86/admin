@@ -31,7 +31,7 @@ class UpdateTownshipRequest extends FormRequest
 
     public function updateTownship($township)
     {
-        $township->name = $this->name;
+        $township->name        = $this->name;
         $township->division_id = $this->division;
 
         if($township->isDirty()) {

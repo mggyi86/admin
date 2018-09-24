@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Responses\MerchantIndexResponse;
+use App\Http\Requests\Merchant\UpdateMerchantRequest;
 
 class MerchantController extends Controller
 {
@@ -15,7 +17,9 @@ class MerchantController extends Controller
      */
     public function index()
     {
-        //
+        $merchants = User::role('merchant')->get();
+
+        return new MerchantIndexResponse($merchants);
     }
 
     /**
@@ -25,7 +29,7 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.merchants.create');
     }
 
     /**
@@ -34,9 +38,13 @@ class MerchantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateMerchantRequest $request)
     {
-        //
+        $request->storeMerchant();
+
+        flash('Merchant added!')->success()->important();
+
+        return redirect()->route('backend.merchants.index');
     }
 
     /**
@@ -47,7 +55,7 @@ class MerchantController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('backend.merchants.show', compact('user'));
     }
 
     /**
@@ -58,7 +66,7 @@ class MerchantController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('backend.merchants.edit', compact('user'));
     }
 
     /**
@@ -68,9 +76,13 @@ class MerchantController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateMerchantRequest $request, User $user)
     {
-        //
+        $request->UpdateMerchantRequest($user);
+
+        flash('Merchant updated!')->success()->important();
+
+        return redirect()->route('backend.merchants.index');
     }
 
     /**
@@ -81,6 +93,13 @@ class MerchantController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        flash('Merchant deleted!')->error()->important();
+
+        if (request()->ajax()) {
+            return response()->json(['message' => 'success'], 200);
+        }
+
+        return redirect()->route('backend.merchants.index');
     }
 }
