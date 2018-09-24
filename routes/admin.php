@@ -28,3 +28,5 @@ Route::resource('townships', 'TownshipController');
 Route::resource('categories', 'CategoryController');
 
 Route::resource('merchants', 'MerchantController');
+
+Route::resource('restaurants', 'RestaurantController');

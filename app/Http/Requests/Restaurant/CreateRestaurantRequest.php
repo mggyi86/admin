@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests\Restaurant;
 
+use App\Models\User;
+use Illuminate\Http\File;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateRestaurantRequest extends FormRequest
@@ -24,18 +28,47 @@ class CreateRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'division' => 'required|integer|exists:divisions,id',
-            'name' => 'required|string|unique:townships,name'
+            'merchant' => 'required|integer|exists:users,id',
+            'name' => 'required|string|unique:restaurants,name',
+            'contact_name' => 'nullable|string',
+            'phone' => 'required|phone:MM',
+            'email' => 'required|string|email|max:255|unique:restaurants,email',
+            'address' => 'nullable|string',
+            'description' => 'nullable|string',
+            'service_charges' => 'nullable|string',
+            'packagings' => 'nullable|string',
+            // 'opening_time' => 'nullable|date_format:H:i',
+            // 'closing_time' => 'nullable|date_format:H:i|after:opening_time',
+            'image' => 'image'
         ];
     }
 
-    public function storeTownship()
+    public function uploadRestaurantImage()
     {
-        $division = Division::findOrFail($this->division);
+        $uploadedImage = $this->image;
 
-        $division->townships()->create([
-            'name' => $this->name,
-            'slug' => str_slug($this->name)
+        $this->fileName = basename(Storage::putFile('public/restaurants', new File($this->image)));
+
+        return $this;
+    }
+
+    public function storeRestaurant()
+    {
+        $user = User::findOrFail($this->merchant);
+        dd($this->opening_time);
+        $user->restaurants()->create([
+            'name'                 => $this->name,
+            'slug'                 => str_slug($this->name),
+            'contact_name'         => $this->contact_name,
+            'phone'                => $this->phone,
+            'email'                => $this->email,
+            'address'              => $this->address,
+            'description'          => $this->description,
+            'service_charges(%)'   => $this->service_charges,
+            'packagings(per item)' => $this->packagings,
+            'opening_time'         => $this->opening_time,
+            'closing_time'         => $this->closing_time,
+            'image'                => $this->fileName
         ]);
     }
 }

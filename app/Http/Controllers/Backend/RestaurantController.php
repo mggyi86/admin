@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\User;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Restaurant\CreateRestaurantRequest;
 
 class RestaurantController extends Controller
 {
@@ -14,9 +17,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $townships = Township::all();
+        $restaurants = Restaurant::all();
 
-        return new TownshipIndexResponse($townships);
+        return new RestaurantIndexResponse($restaurants);
     }
 
     /**
@@ -26,9 +29,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        $divisions = Division::all();
+        $merchants = User::role('merchant')->get();
 
-        return view('backend.townships.create', compact('divisions'));
+        return view('backend.restaurants.create', compact('merchants'));
     }
 
     /**
@@ -37,13 +40,13 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRestaurantRequest $request)
     {
-        $request->storeTownship();
+        $request->uploadRestaurantImage()->storeRestaurant();
 
-        flash('Township added!')->success()->important();
+        flash('Restaurant added!')->success()->important();
 
-        return redirect()->route('backend.townships.index');
+        return redirect()->route('backend.restaurants.index');
     }
 
     /**

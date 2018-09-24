@@ -14,7 +14,6 @@ class AddPhoneNumberAndAddressColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('slug')->after('name')->unique();
             $table->string('phone', 20)->after('email_verified_at');
             $table->string('address')->after('password')->nullable();
         });

@@ -24,8 +24,8 @@ class CreateRestaurantsTable extends Migration
             $table->string('description')->nullable();
             $table->string('service_charges(%)')->nullable();
             $table->string('packagings(per item)')->nullable();
-            $table->time('opening_hour')->nullable();
-            $table->time('closing_hour')->nullable();
+            $table->time('opening_time')->nullable();
+            $table->time('closing_time')->nullable();
             $table->string('image')->nullable();
             $table->unsignedInteger('user_id');
             $table->timestamps();

@@ -15,7 +15,6 @@ class AddUuidColumnToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->uuid('uuid')->after('name')->unique();
-            $table->dropColumn('slug');
         });
     }
 
