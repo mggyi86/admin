@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,15 +29,16 @@ class Restaurant extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'contact_name', 'phone', 'email', 'address', 'description',
+                            'service_charges(%)', 'packagings(per item)', 'opening_time', 'closing_time', 'image'];
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    // public function stocks()
-    // {
-    //     return $this->hasMany(Stock::class);
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

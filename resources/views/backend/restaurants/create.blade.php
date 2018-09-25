@@ -164,17 +164,17 @@
                                         <label for="opening_time" class="col-md-3 control-label">Opening Time</label>
                                         <div class="col-md-4">
                                             <div class="input-group">
-                                                <input type="text" class="form-control timepicker timepicker-no-seconds"
+                                                <input type="text" class="form-control timepicker timepicker-24"
                                                 name="opening_time" value="{{ old('opening_time') }}">
                                                 <span class="input-group-btn">
                                                     <button class="btn default" type="button">
                                                         <i class="fa fa-clock-o"></i>
                                                     </button>
                                                 </span>
-                                                @if ($errors->has('opening_time'))
-                                                <span class="help-block"> {{ $errors->first('opening_time') }} </span>
-                                                @endif
                                             </div>
+                                            @if ($errors->has('opening_time'))
+                                            <span class="help-block"> {{ $errors->first('opening_time') }} </span>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -182,17 +182,17 @@
                                         <label for="closing_time" class="col-md-3 control-label">Closing Time</label>
                                         <div class="col-md-4">
                                             <div class="input-group">
-                                                <input type="text" class="form-control timepicker timepicker-no-seconds"
+                                                <input type="text" class="form-control timepicker timepicker-24"
                                                 name="closing_time" value="{{ old('closing_time') }}">
                                                 <span class="input-group-btn">
                                                     <button class="btn default" type="button">
                                                         <i class="fa fa-clock-o"></i>
                                                     </button>
                                                 </span>
-                                                @if ($errors->has('closing_time'))
-                                                <span class="help-block"> {{ $errors->first('closing_time') }} </span>
-                                                @endif
                                             </div>
+                                            @if ($errors->has('closing_time'))
+                                            <span class="help-block"> {{ $errors->first('closing_time') }} </span>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -262,6 +262,12 @@ $(document).ready(function() {
         minuteStep: 5,
         defaultTime: !1
     });
+    $(".timepicker-24").timepicker({
+        autoclose: !0,
+        minuteStep: 5,
+        showSeconds: !1,
+        showMeridian: !1
+    })
     $(".timepicker").parent(".input-group").on("click", ".input-group-btn", function (t) {
         t.preventDefault(), $(this).parent(".input-group").find(".timepicker").timepicker("showWidget")
     });

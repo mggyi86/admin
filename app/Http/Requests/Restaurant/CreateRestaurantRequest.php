@@ -37,8 +37,8 @@ class CreateRestaurantRequest extends FormRequest
             'description' => 'nullable|string',
             'service_charges' => 'nullable|string',
             'packagings' => 'nullable|string',
-            // 'opening_time' => 'nullable|date_format:H:i',
-            // 'closing_time' => 'nullable|date_format:H:i|after:opening_time',
+            'opening_time' => 'nullable|date_format:H:i',
+            'closing_time' => 'nullable|date_format:H:i|after:opening_time',
             'image' => 'image'
         ];
     }
@@ -47,7 +47,9 @@ class CreateRestaurantRequest extends FormRequest
     {
         $uploadedImage = $this->image;
 
-        $this->fileName = basename(Storage::putFile('public/restaurants', new File($this->image)));
+        if($uploadedImage) {
+            $this->fileName = basename(Storage::putFile('public/restaurants', new File($uploadedImage)));
+        }
 
         return $this;
     }
@@ -55,7 +57,7 @@ class CreateRestaurantRequest extends FormRequest
     public function storeRestaurant()
     {
         $user = User::findOrFail($this->merchant);
-        dd($this->opening_time);
+
         $user->restaurants()->create([
             'name'                 => $this->name,
             'slug'                 => str_slug($this->name),

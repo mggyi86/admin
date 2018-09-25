@@ -20,6 +20,15 @@ class RestaurantIndexResponse implements Responsable
         if (request()->ajax()) {
 
             return DataTables::of($this->restaurants)->addIndexColumn()
+                    ->editColumn('user_id', function($restaurant) {
+                        return $restaurant->user->name;
+                    })
+                    ->editColumn('opening_time', function($restaurant) {
+                        return date('h:i A', strtotime($restaurant->opening_time));;
+                    })
+                    ->editColumn('closing_time', function($restaurant) {
+                        return date('h:i A', strtotime($restaurant->closing_time));;
+                    })
                     ->addColumn('action', function ($restaurant) {
                         return '<a href="/backend/restaurants/'. $restaurant->slug.'"
                                 class="btn btn-sm btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
@@ -33,6 +42,6 @@ class RestaurantIndexResponse implements Responsable
                     ->make(true);
         }
 
-        return view('backend.divisions.index');
+        return view('backend.restaurants.index');
     }
 }

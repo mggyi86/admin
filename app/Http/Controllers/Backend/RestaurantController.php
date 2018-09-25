@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Responses\RestaurantIndexResponse;
 use App\Http\Requests\Restaurant\CreateRestaurantRequest;
 
 class RestaurantController extends Controller
@@ -97,13 +98,13 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        $township->delete();
-        flash('Township deleted!')->error()->important();
+        $restaurant->delete();
+        flash('Restaurant deleted!')->error()->important();
 
         if (request()->ajax()) {
             return response()->json(['message' => 'success'], 200);
         }
 
-        return redirect()->route('backend.townships.index');
+        return redirect()->route('backend.restaurants.index');
     }
 }
