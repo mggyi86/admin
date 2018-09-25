@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             DivisionsTableSeeder::class,
             TownshipsTableSeeder::class,
-            CategoriesTableSeeder::class
+            CategoriesTableSeeder::class,
+            RestaurantsTableSeeder::class
         ]);
     }
 }
