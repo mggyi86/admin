@@ -23,6 +23,10 @@ class RestaurantIndexResponse implements Responsable
                     ->editColumn('user_id', function($restaurant) {
                         return $restaurant->user->name;
                     })
+                    ->editColumn('image', function($restaurant) {
+                        return '<div class="thumbnail" style="max-height: 60px;overflow: hidden;">
+                                <img alt="" src="'.$restaurant->image_path.'"></div>';
+                    })
                     ->editColumn('opening_time', function($restaurant) {
                         return date('h:i A', strtotime($restaurant->opening_time));;
                     })
@@ -39,6 +43,7 @@ class RestaurantIndexResponse implements Responsable
                                 <button data-remote="/backend/restaurants/'.$restaurant->slug.'"
                                 class="btn btn-sm btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
                     })
+                    ->rawColumns(['image', 'action'])
                     ->make(true);
         }
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Township')
+@section('title', 'Restaurant')
 
 @section('content')
 <div class="page-bar">
@@ -31,7 +31,7 @@
                 <div class="tools">
                     <a href="javascript:;" class="collapse"> </a>
                     {{--  <a href="#portlet-config" data-toggle="modal" class="config"> </a>  --}}
-                    <a href="{{ route('backend.townships.show', $township->slug) }}" class="reload"> </a>
+                    <a href="{{ route('backend.restaurants.show', $restaurant->slug) }}" class="reload"> </a>
                     <a href="javascript:;" class="remove"> </a>
                 </div>
             </div>
@@ -43,24 +43,71 @@
                                 <th> # </th>
                                 <th> Title </th>
                                 <th> Description </th>
-                                <th> Status </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td> 1 </td>
-                                <td> Name </td>
-                                <td> {{ $township->name }} </td>
-                                <td>
-                                    <span class="label label-sm label-success"> Approved </span>
-                                </td>
+                                <td> Merchant Name </td>
+                                <td> {{ $restaurant->user->name }} </td>
                             </tr>
                             <tr>
                                 <td> 2 </td>
-                                <td> Division </td>
-                                <td> {{ $township->division->name }} </td>
+                                <td> Name </td>
+                                <td> {{ $restaurant->name }} </td>
+                            </tr>
+                            <tr>
+                                <td> 3 </td>
+                                <td> Contact Name </td>
+                                <td> {{ $restaurant->contact_name }} </td>
+                            </tr>
+                            <tr>
+                                <td> 4 </td>
+                                <td> Phone Number </td>
+                                <td> {{ $restaurant->phone }} </td>
+                            </tr>
+                            <tr>
+                                <td> 5 </td>
+                                <td> Email </td>
+                                <td> {{ $restaurant->email }} </td>
+                            </tr>
+                            <tr>
+                                <td> 6 </td>
+                                <td> Address </td>
+                                <td> {{ $restaurant->address }} </td>
+                            </tr>
+                            <tr>
+                                <td> 7 </td>
+                                <td> Description </td>
+                                <td> {{ $restaurant->description }} </td>
+                            </tr>
+                            <tr>
+                                <td> 8 </td>
+                                <td> Service Charges(%) </td>
+                                <td> {{ $restaurant->service_charges }} </td>
+                            </tr>
+                            <tr>
+                                <td> 9 </td>
+                                <td> Packagings(per item) </td>
+                                <td> {{ $restaurant->packagings }} </td>
+                            </tr>
+                            <tr>
+                                <td> 9 </td>
+                                <td> Opening Time </td>
+                                <td> {{ $restaurant->opening_time }} </td>
+                            </tr>
+                            <tr>
+                                <td> 10 </td>
+                                <td> Closing Time </td>
+                                <td> {{ $restaurant->closing_time }} </td>
+                            </tr>
+                            <tr>
+                                <td> 11 </td>
+                                <td> Image </td>
                                 <td>
-                                    <span class="label label-sm label-success"> Approved </span>
+                                    <div class="thumbnail" style="width: 200px; height: 150px;">
+                                        <img alt="" src="{{ $restaurant->image_path }}">
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

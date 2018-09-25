@@ -56,7 +56,7 @@
                                 <div class="form-body">
 
                                     <div class="form-group{{ $errors->has('merchant') ? ' has-error ' : ''}}">
-                                        <label for="merchant"class="col-md-3 control-label">Select Merchant</label>
+                                        <label for="merchant" class="col-md-3 control-label">Select Merchant</label>
                                         <div class="col-md-4">
                                             <select id="merchant" class="form-control select2" name="merchant" required>
                                                 <option></option>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\RestaurantIndexResponse;
 use App\Http\Requests\Restaurant\CreateRestaurantRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantRequest;
 
 class RestaurantController extends Controller
 {
@@ -43,7 +44,7 @@ class RestaurantController extends Controller
      */
     public function store(CreateRestaurantRequest $request)
     {
-        $request->uploadRestaurantImage()->storeRestaurant();
+        $request->storeRestaurant();
 
         flash('Restaurant added!')->success()->important();
 
@@ -58,7 +59,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('backend.townships.show', compact('township'));
+        return view('backend.restaurants.show', compact('restaurant'));
     }
 
     /**
@@ -69,9 +70,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        $divisions = Division::all();
+        $merchants = User::role('merchant')->get();
 
-        return view('backend.townships.edit', compact('township', 'divisions'));
+        return view('backend.restaurants.edit', compact('restaurant', 'merchants'));
     }
 
     /**
@@ -81,13 +82,13 @@ class RestaurantController extends Controller
      * @param  \App\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        $request->updateTownship($township);
+        $request->updateRestaurant($restaurant);
 
-        flash('Township updated!')->success()->important();
+        flash('Restaurant updated!')->success()->important();
 
-        return redirect()->route('backend.townships.index');
+        return redirect()->route('backend.restaurants.index');
     }
 
     /**

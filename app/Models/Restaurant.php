@@ -41,4 +41,19 @@ class Restaurant extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getImagePathAttribute()
+    {
+        return asset('storage/restaurants/' . $this->image);
+    }
+
+    public function getServiceChargesAttribute()
+    {
+        return $this->{'service_charges(%)'};
+    }
+
+    public function getPackagingsAttribute()
+    {
+        return $this->{'packagings(per item)'};
+    }
 }

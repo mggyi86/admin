@@ -86,6 +86,7 @@
                             <th>Packagings(per item)</th>
                             <th>Opening Time</th>
                             <th>Closing Time</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -131,6 +132,7 @@ $(document).ready(function() {
         { data: 'packagings(per item)', name: 'packagings(per item)'},
         { data: 'opening_time', name: 'opening_time'},
         { data: 'closing_time', name: 'closing_time'},
+        { data: 'image', name: 'image'},
         { data: 'action', name: 'action', orderable: false, searchable: false }
     ],
     "columnDefs": [{

@@ -43,20 +43,11 @@ class CreateRestaurantRequest extends FormRequest
         ];
     }
 
-    public function uploadRestaurantImage()
-    {
-        $uploadedImage = $this->image;
-
-        if($uploadedImage) {
-            $this->fileName = basename(Storage::putFile('public/restaurants', new File($uploadedImage)));
-        }
-
-        return $this;
-    }
-
     public function storeRestaurant()
     {
         $user = User::findOrFail($this->merchant);
+
+        $this->uploadRestaurantImage();
 
         $user->restaurants()->create([
             'name'                 => $this->name,
@@ -72,5 +63,16 @@ class CreateRestaurantRequest extends FormRequest
             'closing_time'         => $this->closing_time,
             'image'                => $this->fileName
         ]);
+    }
+
+    public function uploadRestaurantImage()
+    {
+        $uploadedImage = $this->image;
+
+        if($uploadedImage) {
+            $this->fileName = basename(Storage::putFile('public/restaurants', new File($uploadedImage)));
+        }
+
+        return $this;
     }
 }
