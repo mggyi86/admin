@@ -16,9 +16,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('users')->truncate();
-        DB::table('roles')->truncate();
-        DB::table('model_has_roles')->truncate();
+        DB::statement('TRUNCATE TABLE users CASCADE;');
+        DB::statement('TRUNCATE TABLE roles CASCADE;');
+        DB::statement('TRUNCATE TABLE model_has_roles CASCADE;');
+        // DB::table('users')->truncate();
+        // DB::table('roles')->truncate();
+        // DB::table('model_has_roles')->truncate();
         // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $admin_role = Role::create(['name' => 'admin']);
