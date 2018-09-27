@@ -49,7 +49,7 @@
                             <tr>
                                 <td> 1 </td>
                                 <td> Merchant Name </td>
-                                <td> {{ $restaurant->user->name }} </td>
+                                <td> {{ $restaurant->merchant->name }} </td>
                             </tr>
                             <tr>
                                 <td> 2 </td>

@@ -45,11 +45,11 @@ class CreateRestaurantRequest extends FormRequest
 
     public function storeRestaurant()
     {
-        $user = User::findOrFail($this->merchant);
+        $merchant = User::findOrFail($this->merchant);
 
         $this->uploadRestaurantImage();
 
-        $user->restaurants()->create([
+        $merchant->restaurants()->create([
             'name'                 => $this->name,
             'slug'                 => str_slug($this->name),
             'contact_name'         => $this->contact_name,

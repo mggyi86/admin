@@ -121,7 +121,7 @@ $(document).ready(function() {
     ajax: '{!! url('/backend/restaurants') !!}',
     columns: [
         { data: 'DT_Row_Index', name: 'index_column'},
-        { data: 'user_id', name: 'user_id'},
+        { data: 'merchant_id', name: 'merchant_id'},
         { data: 'name', name: 'name'},
         { data: 'contact_name', name: 'contact_name'},
         { data: 'phone', name: 'phone'},

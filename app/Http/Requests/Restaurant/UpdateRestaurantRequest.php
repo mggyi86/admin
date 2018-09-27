@@ -46,7 +46,7 @@ class UpdateRestaurantRequest extends FormRequest
         $this->uploadRestaurantImage($restaurant);
 
         $restaurant->name                     = $this->name;
-        $restaurant->user_id                  = $this->merchant;
+        $restaurant->merchant_id              = $this->merchant;
         $restaurant->name                     = $this->name;
         $restaurant->contact_name             = $this->contact_name;
         $restaurant->phone                    = $this->phone;

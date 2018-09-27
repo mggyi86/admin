@@ -9,7 +9,7 @@ $factory->define(Restaurant::class, function (Faker $faker) {
     $name = $faker->unique()->catchPhrase;
 
     return [
-        'user_id' => $faker->numberBetween($min = 1, $max = $userCount),
+        'merchant_id' => $faker->numberBetween($min = 1, $max = $userCount),
         'name' => $name,
         'slug' => str_slug($name),
         'contact_name' => $faker->name,

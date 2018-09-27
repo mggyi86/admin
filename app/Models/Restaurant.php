@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\User;
+use App\Models\Merchant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -37,9 +37,14 @@ class Restaurant extends Model
         return 'slug';
     }
 
-    public function user()
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    public function merchant()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Merchant::class);
     }
 
     public function getImagePathAttribute()

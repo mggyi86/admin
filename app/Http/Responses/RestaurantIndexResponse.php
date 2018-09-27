@@ -20,8 +20,8 @@ class RestaurantIndexResponse implements Responsable
         if (request()->ajax()) {
 
             return DataTables::of($this->restaurants)->addIndexColumn()
-                    ->editColumn('user_id', function($restaurant) {
-                        return $restaurant->user->name;
+                    ->editColumn('merchant_id', function($restaurant) {
+                        return $restaurant->merchant->name;
                     })
                     ->editColumn('image', function($restaurant) {
                         return '<div class="thumbnail" style="max-height: 60px;overflow: hidden;">

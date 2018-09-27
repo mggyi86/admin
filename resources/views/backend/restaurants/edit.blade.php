@@ -64,7 +64,7 @@
                                                 <option></option>
                                                 @forelse($merchants as $merchant)
                                                     <option value="{{ $merchant->id }}"
-                                                    @if($merchant->name == $restaurant->user->name)
+                                                    @if($merchant->name == $restaurant->merchant->name)
                                                     selected="selected"
                                                     @endif
                                                     >

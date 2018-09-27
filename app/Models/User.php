@@ -13,6 +13,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles, SoftDeletes;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -34,10 +36,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName()
     {
         return 'uuid';
-    }
-
-    public function restaurants()
-    {
-        return $this->hasMany(Restaurant::class);
     }
 }

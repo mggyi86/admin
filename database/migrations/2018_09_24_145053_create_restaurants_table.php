@@ -27,11 +27,11 @@ class CreateRestaurantsTable extends Migration
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
             $table->string('image')->nullable();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('merchant_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('merchant_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

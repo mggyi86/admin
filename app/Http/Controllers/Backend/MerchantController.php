@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
+use App\Models\Merchant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\MerchantIndexResponse;
@@ -18,7 +19,8 @@ class MerchantController extends Controller
      */
     public function index()
     {
-        $merchants = User::role('merchant')->get();
+        // $merchants = User::role('merchant')->get();
+        $merchants = Merchant::all();
 
         return new MerchantIndexResponse($merchants);
     }
@@ -54,7 +56,7 @@ class MerchantController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $merchant)
+    public function show(Merchant $merchant)
     {
         return view('backend.merchants.show', compact('merchant'));
     }
@@ -65,7 +67,7 @@ class MerchantController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $merchant)
+    public function edit(Merchant $merchant)
     {
         return view('backend.merchants.edit', compact('merchant'));
     }
@@ -77,7 +79,7 @@ class MerchantController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMerchantRequest $request, User $merchant)
+    public function update(UpdateMerchantRequest $request, Merchant $merchant)
     {
         $request->UpdateMerchant($merchant);
 
@@ -92,7 +94,7 @@ class MerchantController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $merchant)
+    public function destroy(Merchant $merchant)
     {
         $merchant->delete();
         flash('Merchant deleted!')->error()->important();
