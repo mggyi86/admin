@@ -19,7 +19,8 @@ use Faker\Generator as Faker;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'uuid' => Str::orderedUuid(),
+        // 'uuid' => Str::orderedUuid(),
+        'uuid' => hexdec(uniqid()),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => Carbon::now(),
         'phone' => $faker->e164PhoneNumber,

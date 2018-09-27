@@ -100,11 +100,12 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         $restaurant->delete();
-        flash('Restaurant deleted!')->error()->important();
 
         if (request()->ajax()) {
             return response()->json(['message' => 'success'], 200);
         }
+
+        flash('Restaurant deleted!')->error()->important();
 
         return redirect()->route('backend.restaurants.index');
     }

@@ -40,7 +40,8 @@ class CreateMerchantRequest extends FormRequest
     {
         $merchant = User::create([
                     'name'              => $this->name,
-                    'uuid'              => Str::orderedUuid(),
+                    // 'uuid'              => Str::orderedUuid(),
+                    'uuid'              => hexdec(uniqid()),
                     'email'             => $this->email,
                     'email_verified_at' => Carbon::now(),
                     'password'          => Hash::make($this->password),

@@ -97,11 +97,12 @@ class MerchantController extends Controller
     public function destroy(Merchant $merchant)
     {
         $merchant->delete();
-        flash('Merchant deleted!')->error()->important();
 
         if (request()->ajax()) {
             return response()->json(['message' => 'success'], 200);
         }
+
+        flash('Merchant deleted!')->error()->important();
 
         return redirect()->route('backend.merchants.index');
     }

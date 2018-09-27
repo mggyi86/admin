@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', function() {
+    // dd(hexdec(uniqid()));
     return view('backend.dashboard');
 })->name('dashboard');
 

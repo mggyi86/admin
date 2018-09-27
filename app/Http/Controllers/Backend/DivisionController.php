@@ -95,11 +95,12 @@ class DivisionController extends Controller
     public function destroy(Division $division)
     {
         $division->delete();
-        flash('Division deleted!')->error()->important();
 
         if (request()->ajax()) {
             return response()->json(['message' => 'success'], 200);
         }
+
+        flash('Division deleted!')->error()->important();
 
         return redirect()->route('backend.divisions.index');
     }

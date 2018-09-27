@@ -95,11 +95,12 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        flash('Category deleted!')->error()->important();
 
         if (request()->ajax()) {
             return response()->json(['message' => 'success'], 200);
         }
+
+        flash('Category deleted!')->error()->important();
 
         return redirect()->route('backend.categories.index');
     }
