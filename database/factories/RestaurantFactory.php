@@ -21,6 +21,6 @@ $factory->define(Restaurant::class, function (Faker $faker) {
         'packagings(per item)' => $faker->randomFloat,
         'opening_time' => $faker->time($format = 'H:i:s', $max = 'now'),
         'closing_time' => $faker->time($format = 'H:i:s', $max = 'now'),
-        'image' => $faker->image($dir = public_path('storage/restaurants'), $width = 640, $height = 480, 'cats', false),
+        'image' => $faker->image($dir = public_path('storage/restaurants'), $width = 150, $height = 150, 'food', false),
     ];
 });
