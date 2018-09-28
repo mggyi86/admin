@@ -26,53 +26,40 @@ class UpdateStockRequest extends FormRequest
     public function rules()
     {
         return [
-            'merchant' => 'required|integer|exists:users,id',
-            'name' => 'required|string|unique:restaurants,name,' . $this->route('restaurant')->id,
-            'contact_name' => 'nullable|string',
-            'phone' => 'required|phone:MM',
-            'email' => 'required|string|email|max:255|unique:restaurants,email,' . $this->route('restaurant')->id,
-            'address' => 'nullable|string',
-            'description' => 'nullable|string',
-            'service_charges' => 'nullable|string',
-            'packagings' => 'nullable|string',
-            'opening_time' => 'nullable|date_format:H:i',
-            'closing_time' => 'nullable|date_format:H:i|after:opening_time',
-            'image' => 'image',
+            'restaurant' => 'required|integer|exists:restaurants,id',
+            'name_en' => 'required|string',
+            'name_mm' => 'nullable|string',
+            'net_price' => 'required|integer',
+            'discounted_price' => 'required|integer',
+            'image' => 'image'
         ];
     }
 
-    public function updateStock($restaurant)
+    public function updateStock($stock)
     {
-        $this->uploadRestaurantImage($restaurant);
+        $this->uploadStockImage($stock);
 
-        $restaurant->name                     = $this->name;
-        $restaurant->merchant_id              = $this->merchant;
-        $restaurant->name                     = $this->name;
-        $restaurant->contact_name             = $this->contact_name;
-        $restaurant->phone                    = $this->phone;
-        $restaurant->email                    = $this->email;
-        $restaurant->address                  = $this->address;
-        $restaurant->description              = $this->description;
-        $restaurant->{'service_charges(%)'}   = $this->service_charges;
-        $restaurant->{'packagings(per item)'} = $this->packagings;
-        $restaurant->opening_time             = $this->opening_time;
-        $restaurant->closing_time             = $this->closing_time;
-        $restaurant->image                    = $this->fileName;
+        $stock->name_en             = $this->name_en;
+        $stock->name_mm             = $this->name_mm;
+        $stock->restaurant_id       = $this->restaurant;
+        $stock->uuid                = hexdec(uniqid());
+        $stock->net_price           = $this->net_price;
+        $stock->discounted_price    = $this->discounted_price;
+        $stock->image               = $this->fileName;
 
-        if($restaurant->isDirty()) {
-            $restaurant->slug = str_slug($this->name);
-            $restaurant->save();
+        if($stock->isDirty()) {
+            $stock->save();
         }
     }
 
-    public function uploadRestaurantImage($restaurant)
+    public function uploadStockImage($stock)
     {
         $uploadedImage = $this->image;
-        $this->fileName = $restaurant->image;
+        $this->fileName = $stock->image;
 
         if($uploadedImage) {
-            Storage::delete('public/restaurants/' . $restaurant->image);
-            $this->fileName = basename(Storage::putFile('public/restaurants', new File($uploadedImage)));
+            Storage::delete('public/stocks/' . $stock->image);
+            $this->fileName = basename(Storage::putFile('public/stocks', new File($uploadedImage)));
         }
 
         return $this;

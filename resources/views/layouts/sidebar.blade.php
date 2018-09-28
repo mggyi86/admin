@@ -121,6 +121,16 @@
                     @endif
                 </a>
             </li>
+            <li class="nav-item{{ request()->url() == route('backend.stocks.index') ? ' active open ' : '' }}">
+                <a href="{{ route('backend.stocks.index') }}" class="nav-link nav-toggle">
+                    <i class="icon-puzzle"></i>
+                    <span class="title">Stock</span>
+                    @if(request()->url() == route('backend.stocks.index'))
+                        <span class="selected"></span>
+                        {{--  <span class="arrow open"></span>  --}}
+                    @endif
+                </a>
+            </li>
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>

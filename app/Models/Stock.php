@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Stock extends Model
 {
@@ -28,7 +29,9 @@ class Stock extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = [
+        'name_mm', 'name_en', 'uuid', 'net_price', 'discounted_price', 'image'
+    ];
 
     public function getRouteKeyName()
     {
@@ -38,5 +41,10 @@ class Stock extends Model
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);
+    }
+
+    public function getImagePathAttribute()
+    {
+        return asset('storage/stocks/' . $this->image);
     }
 }

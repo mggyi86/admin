@@ -23,24 +23,18 @@ class StockIndexResponse implements Responsable
                     ->editColumn('restaurant_id', function($stock) {
                         return $stock->restaurant->name;
                     })
-                    ->editColumn('image', function($stockstock) {
+                    ->editColumn('image', function($stock) {
                         return '<div class="thumbnail" style="max-height: 60px;overflow: hidden;">
-                                <img alt="" src="'.$restaurant->image_path.'"></div>';
-                    })
-                    ->editColumn('opening_time', function($stock) {
-                        return date('h:i A', strtotime($stock->opening_time));;
-                    })
-                    ->editColumn('closing_time', function($stock) {
-                        return date('h:i A', strtotime($stock->closing_time));;
+                                <img alt="" src="'.$stock->image_path.'"></div>';
                     })
                     ->addColumn('action', function ($stock) {
-                        return '<a href="/backend/stocks/'. $stock->slug.'"
+                        return '<a href="/backend/stocks/'. $stock->uuid.'"
                                 class="btn btn-sm btn-success"><i class="glyphicon glyphicon-eye-open"></i> </a>
 
-                                <a href="/backend/stocks/'.$stock->slug.'/edit"
+                                <a href="/backend/stocks/'.$stock->uuid.'/edit"
                                 class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> </a>
 
-                                <button data-remote="/backend/stocks/'.$stock->slug.'"
+                                <button data-remote="/backend/stocks/'.$stock->uuid.'"
                                 class="btn btn-sm btn-danger btn-delete"><i class="glyphicon glyphicon-trash"></i></button>';
                     })
                     ->rawColumns(['image', 'action'])

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Stock;
 use App\Models\Merchant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -47,6 +48,11 @@ class Restaurant extends Model
     public function merchant()
     {
         return $this->belongsTo(Merchant::class);
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
     }
 
     public function getImagePathAttribute()

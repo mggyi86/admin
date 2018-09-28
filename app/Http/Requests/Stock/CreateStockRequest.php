@@ -28,17 +28,11 @@ class CreateStockRequest extends FormRequest
     public function rules()
     {
         return [
-            'merchant' => 'required|integer|exists:users,id',
-            'name' => 'required|string|unique:restaurants,name',
-            'contact_name' => 'nullable|string',
-            'phone' => 'required|phone:MM',
-            'email' => 'required|string|email|max:255|unique:restaurants,email',
-            'address' => 'nullable|string',
-            'description' => 'nullable|string',
-            'service_charges' => 'nullable|string',
-            'packagings' => 'nullable|string',
-            'opening_time' => 'nullable|date_format:H:i',
-            'closing_time' => 'nullable|date_format:H:i|after:opening_time',
+            'restaurant' => 'required|integer|exists:restaurants,id',
+            'name_en' => 'required|string',
+            'name_mm' => 'nullable|string',
+            'net_price' => 'required|integer',
+            'discounted_price' => 'required|integer',
             'image' => 'image'
         ];
     }
@@ -47,30 +41,24 @@ class CreateStockRequest extends FormRequest
     {
         $restaurant = Restaurant::findOrFail($this->restaurant);
 
-        $this->uploadRestaurantImage();
+        $this->uploadStockImage();
 
-        $merchant->restaurants()->create([
-            'name'                 => $this->name,
-            'slug'                 => str_slug($this->name),
-            'contact_name'         => $this->contact_name,
-            'phone'                => $this->phone,
-            'email'                => $this->email,
-            'address'              => $this->address,
-            'description'          => $this->description,
-            'service_charges(%)'   => $this->service_charges,
-            'packagings(per item)' => $this->packagings,
-            'opening_time'         => $this->opening_time,
-            'closing_time'         => $this->closing_time,
+        $restaurant->stocks()->create([
+            'name_en'              => $this->name_en,
+            'name_mm'              => $this->name_mm,
+            'uuid'                 => hexdec(uniqid()),
+            'net_price'            => $this->net_price,
+            'discounted_price'     => $this->discounted_price,
             'image'                => $this->fileName
         ]);
     }
 
-    public function uploadRestaurantImage()
+    public function uploadStockImage()
     {
         $uploadedImage = $this->image;
 
         if($uploadedImage) {
-            $this->fileName = basename(Storage::putFile('public/restaurants', new File($uploadedImage)));
+            $this->fileName = basename(Storage::putFile('public/stocks', new File($uploadedImage)));
         }
 
         return $this;

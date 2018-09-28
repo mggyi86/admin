@@ -5,8 +5,10 @@ use Illuminate\Database\Seeder;
 
 class DivisionsTableSeeder extends Seeder
 {
-    protected $names = ['Yangon', 'Mandalay', 'Bago', 'Ayeyarwady', 'Shan State', 'Sagain', 'Naypyidaw', 'Mon State',
-        'Magway', 'Kayin State', 'Kayah State', 'Kachin State', 'Chin State', 'Tanintharyi', 'Rakhine State'];
+    protected $names = [
+        'Yangon', 'Mandalay', 'Bago', 'Ayeyarwady', 'Shan State', 'Sagain', 'Naypyidaw', 'Mon State', 'Magway',
+        'Kayin State', 'Kayah State', 'Kachin State', 'Chin State', 'Tanintharyi', 'Rakhine State'
+    ];
     /**
      * Run the database seeds.
      *

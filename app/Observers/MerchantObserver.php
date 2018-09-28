@@ -37,8 +37,9 @@ class MerchantObserver
      */
     public function deleted(Merchant $merchant)
     {
-        Log::info('success');
         $merchant->restaurants()->delete();
+        $merchant->restaurants()->stocks()->delete();
+        Log::info('Merchant id ' . $merchant->id . '/Merchant Name ' . $merchant->name . '\'s restaurants had successfully deleted');
     }
 
     /**

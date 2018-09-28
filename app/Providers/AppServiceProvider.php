@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Merchant;
+use App\Models\Restaurant;
 use App\Observers\MerchantObserver;
+use App\Observers\RestaurantObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Merchant::observe(MerchantObserver::class);
+        Restaurant::observe(RestaurantObserver::class);
     }
 
     /**

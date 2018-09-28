@@ -72,7 +72,7 @@ class StockController extends Controller
     {
         $restaurants = Restaurant::all();
 
-        return view('backend.stocks.edit', compact('restaurant', 'restaurants'));
+        return view('backend.stocks.edit', compact('stock', 'restaurants'));
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Restaurants')
+@section('title', 'Stocks')
 @push('css')
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
@@ -16,13 +16,13 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Restaurants</span>
+            <span>Stocks</span>
         </li>
     </ul>
 </div>
 <!-- END PAGE BAR -->
 <!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> Restaurant Table
+<h1 class="page-title"> Stock Table
     {{--  <small>basic bootstrap tables with various options and styles</small>  --}}
 </h1>
 <!-- END PAGE TITLE-->
@@ -34,7 +34,7 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase"> Restaurant Lists</span>
+                    <span class="caption-subject bold uppercase"> Stock Lists</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -43,7 +43,9 @@
                         @include('flash::message')
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <a href="{{ route('backend.restaurants.create') }}" id="sample_editable_1_new" class="btn sbold green"> Add New
+                                <a href="{{ route('backend.stocks.create') }}" id="sample_editable_1_new"
+                                class="btn sbold green">
+                                    Add New
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -71,21 +73,16 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="restaurants-table" style="width: 100%;">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                id="stocks-table" style="width: 100%;">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Merchant Name</th>
-                            <th>Name</th>
-                            <th>Contact Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Description</th>
-                            <th>Service Charges(%)</th>
-                            <th>Packagings(per item)</th>
-                            <th>Opening Time</th>
-                            <th>Closing Time</th>
+                            <th>Restaurant Name</th>
+                            <th>English Name</th>
+                            <th>Myanmar Name</th>
+                            <th>Net Price</th>
+                            <th>Discounted Pprice</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -113,25 +110,19 @@
 
 <script>
 $(document).ready(function() {
-    var table = $('#restaurants-table').DataTable({
+    var table = $('#stocks-table').DataTable({
     processing: true,
     serverSide: true,
     responsive: true,
     autoWidth: true,
-    ajax: '{!! url('/backend/restaurants') !!}',
+    ajax: '{!! url('/backend/stocks') !!}',
     columns: [
         { data: 'DT_Row_Index', name: 'index_column'},
-        { data: 'merchant_id', name: 'merchant_id'},
-        { data: 'name', name: 'name'},
-        { data: 'contact_name', name: 'contact_name'},
-        { data: 'phone', name: 'phone'},
-        { data: 'email', name: 'email'},
-        { data: 'address', name: 'address'},
-        { data: 'description', name: 'description'},
-        { data: 'service_charges(%)', name: 'service_charges(%)'},
-        { data: 'packagings(per item)', name: 'packagings(per item)'},
-        { data: 'opening_time', name: 'opening_time'},
-        { data: 'closing_time', name: 'closing_time'},
+        { data: 'restaurant_id', name: 'restaurant_id'},
+        { data: 'name_en', name: 'name_en'},
+        { data: 'name_mm', name: 'name_mm'},
+        { data: 'net_price', name: 'net_price'},
+        { data: 'discounted_price', name: 'discounted_price'},
         { data: 'image', name: 'image'},
         { data: 'action', name: 'action', orderable: false, searchable: false }
     ],
@@ -148,7 +139,7 @@ $(document).ready(function() {
         });
     }).draw();
 
-    $('#restaurants-table').on('click', '.btn-delete[data-remote]', function (e) {
+    $('#stocks-table').on('click', '.btn-delete[data-remote]', function (e) {
         e.preventDefault();
         var url = $(this).data('remote');
         swal({
@@ -174,11 +165,11 @@ $(document).ready(function() {
                     url: url,
                     type: 'DELETE'
                 }).always(function (data) {
-                    $('#restaurants-table').DataTable().draw(false);
+                    $('#stocks-table').DataTable().draw(false);
                 });
-                swal("Deleted!", "Restaurant has been deleted.", "success");
+                swal("Deleted!", "Stock has been deleted.", "success");
             } else {
-              swal("Cancelled", "Restaurant is safe :)", "error");
+              swal("Cancelled", "Stock is safe :)", "error");
             }
         });
     });
